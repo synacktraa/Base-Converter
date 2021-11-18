@@ -1,4 +1,6 @@
-#include<stdio.h>
+#include <stdio.h>
+
+#include "fstring.h" //self made header file which includes functions to manipulate strings
 
 /*
 	BINARY[BASE-2], DECIMAL[BASE-10], HEXADECIMAL[BASE-16], OCTAL[BASE-8]
@@ -13,67 +15,36 @@
 	DECIMAL TO HEXADECIMAL
 	DECIMAL TO OCTAL
 
-	HEXADECIMAL TO BINARY
-	HEXADECIMAL TO DECIMAL
-	HEXADECIMAL TO OCTAL
-
 	OCTAL TO BINARY
 	OCTAL TO DECIMAL
 	OCTAL TO HEXADECIMAL
-*/
-int number;
-char hexa[100];
 
-int choice_input();
-void value_input(int);
+	HEXADECIMAL TO BINARY
+	HEXADECIMAL TO DECIMAL
+	HEXADECIMAL TO OCTAL
+*/
+
+int number = 0;
+char input[100] = "help()";
+char outcome[100];
+
+void input_output();
 int power(int, int);
 
+//base conversion function prototypes
 int binToDec(int);
 void binToHex(int);
 void binToOct(int);
 void decToBin(int);
 void decToHex(int);
 void decToOct(int);
-int hexToDec(char*);
-void hexToBin(char*);
-void hexToOct(char*);
 int octToDec(int);
 void octToBin(int);
 void octToHex(int);
+int hexToDec(char*);
+void hexToOct(char*);
+void hexToBin(char*);
 
-
-int choice_input(){
-
-   int choice;
-
-	printf("\nWhich base do you want it to convert to? \n");
-	printf("\n1. BINARY TO DECIMAL\n2. BINARY TO HEXADECIMAL\n3. BINARY TO OCTAL\n");
-   printf("\n4. DECIMAL TO BINARY\n5. DECIMAL TO HEXADECIMAL\n6. DECIMAL TO OCTAL\n");
-   printf("\n7. HEXADECIMAL TO DECIMAL\n8. HEXADECIMAL TO BINARY\n9. HEXADECIMAL TO OCTAL\n");
-   printf("\n10. OCTAL TO DECIMAL\n11. OCTAL TO BINARY\n12. OCTAL TO HEXADECIMAL\n");
-	printf("Enter you Choice: ");
-	scanf("%d", &choice);
-
-   return choice;
-}
-
-void value_input(int choice){
-
-   if((choice>=1 && choice<=3)){
-      printf("Enter the Binary: ");
-	   scanf("%d", &number);
-   } else if((choice>=4 && choice<=6)){
-      printf("Enter the Decimal: ");
-	   scanf("%d", &number);
-   } else if((choice>=7 && choice<=9)){
-      printf("Enter the Hexadecimal: ");
-      scanf("%100s", hexa);
-      // fgets(hexa, 100, stdin);
-   } else if((choice>=10 && choice<=12)){
-      printf("Enter the Octal: ");
-	   scanf("%d", &number);
-   }
-}
 
 int power(int base, int p){ //this user defined function takes a number and power vaue and returns base^p
    int result = 1;
@@ -88,6 +59,82 @@ int power(int base, int p){ //this user defined function takes a number and powe
       return result; //returns 1
    }
 }
+
+void input_output(){
+
+    size_t i, j, n;
+
+    while(Strcmp(input, "exit()") == 1){
+      
+        printf("\n$ ");
+        scanf("%s", input);
+
+        if(Strncmp(input, "dec", 3) == 0 || Strncmp(input, "hex", 3) == 0 || Strncmp(input, "oct", 3) == 0 || Strncmp(input, "bin", 3) == 0){
+
+            for (i = 4, j = 0; *(input+i) != ')'; i++, j++){
+                *(outcome+j) = *(input+i);
+            }
+            *(outcome+j) = '\0';
+            auto void str_to_int(char*);
+            void str_to_int(char* result){
+                int exp = j-3;
+                for(i = 2, n = 0; i < j; i++, n++){
+                    if(*(result+i) >= 48 || *(result+i) <= 57){
+                        number += (*(result+i)-48)*power(10, exp);
+                        exp--;
+                    } else {
+                        printf("wrong input!");
+                        break;
+                    }
+                }
+            }
+            // printf("j: %d\n", j);
+            if(*outcome == 48 && *(outcome+1) == 98){
+                str_to_int(outcome);
+                if(Strncmp(input, "dec", 3) == 0){
+                    printf("0d%d",binToDec(number));
+                } else if(Strncmp(input, "hex", 3) == 0){
+                    binToHex(number);
+                } else if(Strncmp(input, "oct", 3) == 0){
+                    binToOct(number);
+                }
+                number = 0;
+
+            } else if(*outcome == 48 && *(outcome+1) == 100){
+                str_to_int(outcome);
+                if(Strncmp(input, "bin", 3) == 0){
+                    decToBin(number);
+                } else if(Strncmp(input, "hex", 3) == 0){
+                    decToHex(number);
+                } else if(Strncmp(input, "oct", 3) == 0){
+                    decToOct(number);
+                }
+                number = 0;
+            }  else if(*outcome == 48 && *(outcome+1) == 111){
+                str_to_int(outcome);
+                if(Strncmp(input, "dec", 3) == 0){
+                    printf("0d%d", octToDec(number));
+                } else if(Strncmp(input, "hex", 3) == 0){
+                    octToHex(number);
+                } else if(Strncmp(input, "bin", 3) == 0){
+                    octToBin(number);
+                }
+                number = 0;
+            } else if(*outcome == 48 && *(outcome+1) == 120){
+                if(Strncmp(input, "dec", 3) == 0){
+                    printf("0d%d", hexToDec(outcome));
+                } else if(Strncmp(input, "oct", 3) == 0){
+                    hexToOct(outcome);
+                } else if(Strncmp(input, "bin", 3) == 0){
+                    hexToBin(outcome);
+                }
+            }
+         
+      }
+   }
+}
+
+
 
 int binToDec(int n){ // function to convert binary value to decimal value
 
@@ -158,6 +205,7 @@ void decToHex(int n){ //this function converts decimal value to hexadecimal valu
       printf("%c", hex[j]);
 }
 
+
 void decToOct(int n){ //this fucntion converts decimal value to octal value
 
    int dec = n; //dec variable is set to user provided decimal value
@@ -174,58 +222,6 @@ void decToOct(int n){ //this fucntion converts decimal value to octal value
    printf("0o");
    for (int j = count-1; j >= 0; j--) //looping the array oct in reverse to print it's content
       printf("%d", oct[j]);
-}
-
-int hexToDec(char* h){ // this function converts hex value to dec value
-
-   auto int decimal(int,int,int); //using auto keyword to use a nested function
-   int decimal(int bit, int count, int minValue){ //this nested function converts the single hex
-   // character to it's decimal value and returns it.
-
-      int num = 0, hexPow = 0;
-      hexPow = power(16, bit); //hexPow is set to 16^bit
-      num += (*(h+count)-minValue)*hexPow; //num is set to the decimal value of the hex char 
-      return num; //finally returning the num
-   } 
-   int dec = 0, bitshift = 0, cnt = 0;
-   // for(int i = 0; *(h+i) != '\0'; i++)
-   //    cnt++;
-   //    [OR] 
-   // for(int i = 0; h[i] != '\0'; i++)
-   //    cnt++;
-   //    [OR]
-   char* ptr = h; //pointer to char variable ptr is set to the first element of the given array
-   while(*ptr != '\0'){ //checks if value at the pointer is not null
-      cnt++; //cnt is incremented
-      ptr++; //pointer is incremented to check the if the string is ended or not
-   }
-   while(cnt >= 0){ // while cnt is greater than -1
-      --cnt; //cnt is decremented
-      //Refer ascii table to understand more precisely.
-      if((*(h+cnt) >=97 && *(h+cnt) <=102)) // checks if the value at the given index of the array is between 97 and 102
-      //between decimal value 97 and 102, the char value a-f is located [lowercase]
-         dec += decimal(bitshift, cnt, 87); //if yes dec is incremented to value returned by decimal function
-      else if((*(h+cnt) >=65 && *(h+cnt) <=70)) // checks if the value at the given index of the array is between 65 and 70
-      //between decimal value 65 and 70, the char value A-F is located [uppercase]
-         dec += decimal(bitshift, cnt, 55); //if yes dec is incremented to value returned by decimal function
-      else if((*(h+cnt) >=48 && *(h+cnt) <=57)) // checks if the value at the given index of the array is between 48 and 57
-      //between decimal value 48 and 57, the char value 0-9 is located
-         dec += decimal(bitshift, cnt, 48); //if yes dec is incremented to value returned by decimal function
-      
-      bitshift++; //bitshift is incremented, the present bit is passed to decimal function for 
-      //calculating the decimal
-   }
-   return dec;
-}
-   
-void hexToBin(char* h){ //this function converts hex value to bin value
-   int dec = hexToDec(h); //dec is set to value returned by hexToDec function
-   decToBin(dec); // calling decToBin function which converts the decimal to binary value and prints it.
-}
-
-void hexToOct(char* h){ //this function converts hex value to octal value
-   int dec = hexToDec(h); //dec is set to value returned by hexToDec function
-   decToOct(dec); // calling decToOct function which converts the decimal to octal value and prints it.
 }
 
 int octToDec(int n){//this function converts octal value to dec value
@@ -258,52 +254,61 @@ void octToHex(int n){ //this function converts oct value to hex value
    decToHex(dec); //converts dec value to hex value and prints it.
 }
 
+int hexToDec(char* h){ // this function converts hex value to dec value
+
+    auto int decimal(int,int,int); //using auto keyword to use a nested function
+    int decimal(int bit, int count, int minValue){ //this nested function converts the single hex
+    // character to it's decimal value and returns it.
+
+        int num = 0, hexPow = 0;
+        hexPow = power(16, bit); //hexPow is set to 16^bit
+        num += (*(h+count)-minValue)*hexPow; //num is set to the decimal value of the hex char 
+        return num; //finally returning the num
+    } 
+    int dec = 0, bitshift = 0, cnt = 0;
+    // for(int i = 0; *(h+i) != '\0'; i++)
+    //    cnt++;
+    //    [OR] 
+    // for(int i = 0; h[i] != '\0'; i++)
+    //    cnt++;
+    //    [OR]
+    char* ptr = h; //pointer to char variable ptr is set to the first element of the given array
+    while(*ptr != '\0'){ //checks if value at the pointer is not null
+        cnt++; //cnt is incremented
+        ptr++; //pointer is incremented to check the if the string is ended or not
+    }
+    while(cnt >= 0){ // while cnt is greater than -1
+        --cnt; //cnt is decremented
+        //Refer ascii table to understand more precisely.
+        if((*(h+cnt) >=97 && *(h+cnt) <=102)) // checks if the value at the given index of the array is between 97 and 102
+        //between decimal value 97 and 102, the char value a-f is located [lowercase]
+            dec += decimal(bitshift, cnt, 87); //if yes dec is incremented to value returned by decimal function
+        else if((*(h+cnt) >=65 && *(h+cnt) <=70)) // checks if the value at the given index of the array is between 65 and 70
+        //between decimal value 65 and 70, the char value A-F is located [uppercase]
+            dec += decimal(bitshift, cnt, 55); //if yes dec is incremented to value returned by decimal function
+        else if((*(h+cnt) >=48 && *(h+cnt) <=57)) // checks if the value at the given index of the array is between 48 and 57
+        //between decimal value 48 and 57, the char value 0-9 is located
+            dec += decimal(bitshift, cnt, 48); //if yes dec is incremented to value returned by decimal function
+        
+        bitshift++; //bitshift is incremented, the present bit is passed to decimal function for 
+        //calculating the decimal
+    }
+    return dec;
+}
+   
+void hexToBin(char* h){ //this function converts hex value to bin value
+   int dec = hexToDec(h); //dec is set to value returned by hexToDec function
+   decToBin(dec); // calling decToBin function which converts the decimal to binary value and prints it.
+}
+
+void hexToOct(char* h){ //this function converts hex value to octal value
+   int dec = hexToDec(h); //dec is set to value returned by hexToDec function
+   decToOct(dec); // calling decToOct function which converts the decimal to octal value and prints it.
+}
+
 int main(){
 
-   int choice = choice_input();
-   value_input(choice);
-   switch(choice){
+    input_output();
+    return 0;
 
-      case 1:
-         printf("0d%d",binToDec(number));
-         break;
-      case 2:
-         binToHex(number);
-         break;
-      case 3:
-         binToOct(number);
-         break;
-      case 4:
-         decToBin(number);
-         break;
-      case 5:
-         decToHex(number);
-         break;
-      case 6:
-         decToOct(number);
-         break;
-      case 7:
-         printf("0d%d", hexToDec(hexa));
-         break;
-      case 8:
-         hexToBin(hexa);
-         break;
-      case 9:
-         hexToOct(hexa);
-         break;
-      case 10:
-         printf("0d%d",octToDec(number));
-         break;
-      case 11:
-         octToBin(number);
-         break;
-      case 12:
-         octToHex(number);
-         break;
-      default:
-         printf("Something went wrong!");      
-   }
-   //hello this is in update branch.
-
-	return 0;
 }
