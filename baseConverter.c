@@ -64,24 +64,25 @@ void input_output(){
 
     size_t i, j, n;
 
-    while(Strcmp(input, "exit()") == 1){
+    while(Strcmp(input, "exit()") == 1){ //checks if input != exit()
       
         printf("\n$ ");
         scanf("%s", input);
 
         if(Strncmp(input, "dec", 3) == 0 || Strncmp(input, "hex", 3) == 0 || Strncmp(input, "oct", 3) == 0 || Strncmp(input, "bin", 3) == 0){
-
+            //checks if input startswith dec or hex or oct or bin
             for (i = 4, j = 0; *(input+i) != ')'; i++, j++){
-                *(outcome+j) = *(input+i);
+                *(outcome+j) = *(input+i); //outcome stores the content between 3rd index and last used index.
             }
-            *(outcome+j) = '\0';
+            *(outcome+j) = '\0'; //adds null char to the string
             auto void str_to_int(char*);
-            void str_to_int(char* result){
-                int exp = j-3;
-                for(i = 2, n = 0; i < j; i++, n++){
-                    if(*(result+i) >= 48 || *(result+i) <= 57){
-                        number += (*(result+i)-48)*power(10, exp);
-                        exp--;
+            void str_to_int(char* result){ //changes number stored in a string to integer
+                int exp = j-3; //exp is set to j-3 because input arrays' first two elements are useless to get the output
+                for(i = 2, n = 0; i < j; i++, n++){ //starts the loop from index 2 and runs it until i < j
+                    if(*(result+i) >= 48 || *(result+i) <= 57){ // if element is between char value 0-9
+                        number += (*(result+i)-48)*power(10, exp); // number is incremented with the product of decimal 
+                        // element and 10^exp
+                        exp--; //decrementing exp
                     } else {
                         printf("wrong input!");
                         break;
@@ -89,44 +90,44 @@ void input_output(){
                 }
             }
             // printf("j: %d\n", j);
-            if(*outcome == 48 && *(outcome+1) == 98){
-                str_to_int(outcome);
-                if(Strncmp(input, "dec", 3) == 0){
-                    printf("0d%d",binToDec(number));
-                } else if(Strncmp(input, "hex", 3) == 0){
-                    binToHex(number);
-                } else if(Strncmp(input, "oct", 3) == 0){
-                    binToOct(number);
+            if(*outcome == 48 && *(outcome+1) == 98){// if outcome 0th element is 0 and 1st element is char b
+                str_to_int(outcome); //outcome is passed to str_to_int function
+                if(Strncmp(input, "dec", 3) == 0){ //if input startswith dec
+                    printf("0d%d",binToDec(number)); //bin value is converted to decimal value
+                } else if(Strncmp(input, "hex", 3) == 0){ //if input startswith hex
+                    binToHex(number); //bin value is converted to hex value
+                } else if(Strncmp(input, "oct", 3) == 0){ //if input startswith oct
+                    binToOct(number); //bin value is converted to octal value
                 }
                 number = 0;
 
             } else if(*outcome == 48 && *(outcome+1) == 100){
                 str_to_int(outcome);
-                if(Strncmp(input, "bin", 3) == 0){
-                    decToBin(number);
-                } else if(Strncmp(input, "hex", 3) == 0){
-                    decToHex(number);
-                } else if(Strncmp(input, "oct", 3) == 0){
-                    decToOct(number);
+                if(Strncmp(input, "bin", 3) == 0){ //if input startswith bin
+                    decToBin(number); //dec value is converted to bin value
+                } else if(Strncmp(input, "hex", 3) == 0){ //if input startswith hex
+                    decToHex(number); //dec value is converted to hex value
+                } else if(Strncmp(input, "oct", 3) == 0){ //if input startswith oct
+                    decToOct(number); //dec value is converted to oct value
                 }
                 number = 0;
             }  else if(*outcome == 48 && *(outcome+1) == 111){
                 str_to_int(outcome);
-                if(Strncmp(input, "dec", 3) == 0){
-                    printf("0d%d", octToDec(number));
-                } else if(Strncmp(input, "hex", 3) == 0){
-                    octToHex(number);
-                } else if(Strncmp(input, "bin", 3) == 0){
-                    octToBin(number);
+                if(Strncmp(input, "dec", 3) == 0){ //if input startswith dec
+                    printf("0d%d", octToDec(number)); //oct value is converted to dec value
+                } else if(Strncmp(input, "hex", 3) == 0){ //if input startswith hex
+                    octToHex(number); //oct value is converted to hex value
+                } else if(Strncmp(input, "bin", 3) == 0){ //if input startswith bin
+                    octToBin(number); //oct value is converted to bin value
                 }
                 number = 0;
             } else if(*outcome == 48 && *(outcome+1) == 120){
-                if(Strncmp(input, "dec", 3) == 0){
-                    printf("0d%d", hexToDec(outcome));
-                } else if(Strncmp(input, "oct", 3) == 0){
-                    hexToOct(outcome);
-                } else if(Strncmp(input, "bin", 3) == 0){
-                    hexToBin(outcome);
+                if(Strncmp(input, "dec", 3) == 0){ //if input startswith dec
+                    printf("0d%d", hexToDec(outcome)); //hex value is converted to dec value
+                } else if(Strncmp(input, "oct", 3) == 0){ //if input startswith oct
+                    hexToOct(outcome); //hex value is converted to oct value
+                } else if(Strncmp(input, "bin", 3) == 0){ //if input startswith bin
+                    hexToBin(outcome); //hex value is converted to bin value
                 }
             }
          
