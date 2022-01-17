@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "fstring.h" //self made header file which includes functions to manipulate strings
+#include "stringy.h" //self made header file which includes functions to manipulate strings
 
 /*
 	BINARY[BASE-2], DECIMAL[BASE-10], HEXADECIMAL[BASE-16], OCTAL[BASE-8]
