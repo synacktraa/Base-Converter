@@ -10,10 +10,20 @@ char *Strcpy(char*, char*);
 int Strlen(const char*);
 int Strcmp(const char*, const char*);
 int Strcmpi(const char*, const char*);
-int Strncmp(const char*, const char*, size_t);
-int Strncmpi(const char*, const char*, size_t);
-void Strncat(char*, const char*, size_t);
-
+int Strncmp(const char*, const char*, int);
+int Strncmpi(const char*, const char*, int);
+void Strncat(char*, const char*, int);
+int AtoI(const char*);
+float AtoF(const char*);
+void reverse(char*);
+void ItoA(int, char*);
+void FtoA(float, char*, int);
+int binSearch_retIndex(char*, int, int);
+int binSearch_retStat(char*, int, int);
+int insert(char*, int, int, int, int);
+int delete(char*, int, int);
+int linear_search(char*, int, int);
+int linear_search_ret_ind(char*, int, int);
 
 #endif
 
