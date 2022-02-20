@@ -1,5 +1,5 @@
-#ifndef STRINGFUNC_H /* Include guard */
-#define STRINGFUNC_H
+#ifndef UTILS_H /* Include guard */
+#define UTILS_H
 
 //Function declarations
 int isLower(int);
@@ -24,6 +24,7 @@ int insert(char*, int, int, int, int);
 int delete(char*, int, int);
 int linear_search(char*, int, int);
 int linear_search_ret_ind(char*, int, int);
+void Memset(char*, int, int);
 
 #endif
 

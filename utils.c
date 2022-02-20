@@ -350,3 +350,11 @@ int delete(char*data, int index, int length){
     return length;
 
 }
+
+void Memset(char*data, int val, int len){
+   
+   for(int i = 0; i < len; i++){
+      *(data+i) = val;
+   }
+}
+
