@@ -4,6 +4,7 @@
 //Function declarations
 int isLower(int);
 int isUpper(int);
+int isDigit(int);
 int toLower(int);
 int toUpper(int);
 char *Strcpy(char*, char*);
@@ -20,10 +21,10 @@ void ItoA(int, char*);
 void FtoA(float, char*, int);
 int binSearch_retIndex(char*, int, int);
 int binSearch_retStat(char*, int, int);
-int insert(char*, int, int, int, int);
-int delete(char*, int, int);
 int linear_search(char*, int, int);
 int linear_search_ret_ind(char*, int, int);
+int insert(char*, int, int, int, int);
+int delete(char*, int, int);
 void Memset(char*, int, int);
 
 #endif
