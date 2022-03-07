@@ -1,4 +1,18 @@
 
+int power(int base, int p){ //this user defined function takes a number and power vaue and returns base^p
+   int result = 1;
+   if(p){ //if the value is not 0, it runs the statement below
+      for(int i = p; i > 0; i--){ //i i set to p and condition checks if i is greater than 1 if yes...it runs the statement
+      // in the for block which is base is multiplied by base until i is equal 1 
+         result *= base;
+      }
+      return result;
+   }
+   else{ //if the value of p is 0
+      return result; //returns 1
+   }
+}
+
 int isLower(int ch){
    if(ch >= 97 && ch <= 122)
       return 1;
@@ -255,7 +269,7 @@ void FtoA(float dec, char* str, int cnt){
    }
 }
 
-int binSearch_retIndex(char*data, int size, int element){
+int binSearch_retIndex(int*data, int size, int element){
 
     int low, high, mid;
     low = 0;
@@ -281,7 +295,7 @@ int binSearch_retIndex(char*data, int size, int element){
     }
 
 }
-int binSearch_retStat(char*data, int size, int element){
+int binSearch_retStat(int*data, int size, int element){
 
     int low, high, mid;
     low = 0;
@@ -335,7 +349,7 @@ int insert(char*data, int index, int element, int uSize, int tSize){
     
     *(data+index) = element;
     uSize++;
-    return 0;
+    return uSize;
 }
 
 int delete(char*data, int index, int length){
@@ -351,10 +365,10 @@ int delete(char*data, int index, int length){
 
 }
 
-void Memset(char*data, int val, int len){
+void memreset(char*data, int len){
    
    for(int i = 0; i < len; i++){
-      *(data+i) = val;
+      *(data+i) = '\0';
    }
 }
 
