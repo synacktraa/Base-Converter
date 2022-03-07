@@ -17,7 +17,7 @@ Usage: basecon <opt> <value>
         -x - Converts the given value into hexadecimal value.
 ```
 ---
-### Examples:
+## Examples:
 
 >Bin to Hex &#x21B4;
 ```powershell
