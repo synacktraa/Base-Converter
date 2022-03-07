@@ -25,13 +25,13 @@ basecon -x 0b1111
 ```
 <br>
 
->Hex to Int &#x21B4;
+>Hex to Dec &#x21B4;
 ```powershell
 basecon -d 0x2F
 ```
 <br>
 
->Int to Oct &#x21B4;
+>Dec to Oct &#x21B4;
 ```powershell
 basecon -o 47
 ```
