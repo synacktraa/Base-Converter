@@ -45,9 +45,9 @@ void hexToBin(char*);
 
 void exec(char*base, char*data){
 
-    int i, j, n, temp;
+    int temp;
     char bin[50], prefix;
-    memreset(bin, Strlen(bin));
+    Memset(bin, 0, Strlen(bin));
     
     if(isLower(*(data+1))){
         prefix = *(data+1);
@@ -63,8 +63,6 @@ void exec(char*base, char*data){
             binToOct(data); //bin value is converted to octal value
         } else if(Strcmp(base, "-b") == 0){
             printf("0b%s\n", data);
-        } else{
-            fprintf(stderr, "Invalid Option.");
         }
     } else if(prefix == 'o'){
         number = AtoI(data);
@@ -76,9 +74,7 @@ void exec(char*base, char*data){
             octToBin(number); //oct value is converted to bin value
         } else if(Strcmp(base, "-o") == 0){
             printf("0o%s\n", data);
-        }           else{
-            fprintf(stderr, "Invalid Option.");
-        }
+        }          
     } else if(prefix == 'x'){
         if(Strcmp(base, "-d") == 0){ //if input startswith dec
             printf("%d\n", hexToDec(data)); //hex value is converted to dec value
@@ -88,8 +84,6 @@ void exec(char*base, char*data){
             hexToBin(data); //hex value is converted to bin value
         } else if(Strcmp(base, "-x") == 0){
             printf("0x%s\n", data);
-        } else{
-            fprintf(stderr, "Invalid Option.");
         }
 
     }else {
@@ -103,8 +97,6 @@ void exec(char*base, char*data){
             decToOct(number); //dec value is converted to oct value
         } else if(Strcmp(base, "-d") == 0){
             printf("%s\n", data);
-        } else{
-            fprintf(stderr, "Invalid Option.");
         }
 
     }  
@@ -113,7 +105,6 @@ void exec(char*base, char*data){
 
 int binToDec(char* binary){ // function to convert binary value to decimal value
     
-    int n;
     int i = 0, j, k;
     int dec = 0;
     while(*(binary+i) != '\0')
@@ -164,7 +155,7 @@ void decToBin(int n, char*out){ //function to convert decimal value to binary va
 void decToHex(int n){ //this function converts decimal value to hexadecimal value
  
    unsigned int dec = n; //dec variable is set to user provided decimal value
-   int remain, j, i = 0; //declaring remain and j variable as integers and initializing i to 0
+   int remain, i = 0; //declaring remain and j variable as integers and initializing i to 0
    char hex[100]; //declaring character array named hex of size 100
  
    while(dec){ // while dec is not 0 [can be written as dec != 0]
@@ -196,10 +187,10 @@ void decToOct(int n){ //this fucntion converts decimal value to octal value
       dec = dec/8; // dec will be set to quotient after dividing dec by 8
    }
  
-   printf("0o");
-   for (int j = count-1; j >= 0; j--) //looping the array oct in reverse to print it's content
-      printf("%d", oct[j]);
-      printf("\n");
+    printf("0o");
+    for (int j = count-1; j >= 0; j--) //looping the array oct in reverse to print it's content
+        printf("%d", oct[j]);
+    printf("\n");
 }
 
 int octToDec(int n){//this function converts octal value to dec value
@@ -279,7 +270,7 @@ int hexToDec(char* h){ // this function converts hex value to dec value
    
 void hexToBin(char* h){ //this function converts hex value to bin value
     char binary[50];
-    memreset(binary, Strlen(binary));
+    Memset(binary, 0, Strlen(binary));
     int dec = hexToDec(h); //dec is set to value returned by hexToDec function
     decToBin(dec, binary); // calling decToBin function which converts the decimal to binary value and prints it.
     printf("0b%s\n", binary);
@@ -294,11 +285,11 @@ void hexToOct(char* h){ //this function converts hex value to octal value
 int main(int argc, char*argv[]){
 
     if(argc == 2 && (Strcmp(argv[1], "-h") == 0)){
-        fprintf(stdout, "Usage: %s -<base> <value>\n|CLI options|:-\
-        \n\td - Converts the given value into integer value.\
-        \n\tb - Converts the given value into binary value.\
-        \n\to - Converts the given value into octal value.\
-        \n\tx - Converts the given value into hexadecimal value.\n", argv[0]);
+        fprintf(stdout, "Usage: %s -<base> <value>\n|CLI options|:-\n\tBase:\
+        \n\t\td = Converts the given value into integer value.\
+        \n\t\tb = Converts the given value into binary value.\
+        \n\t\to = Converts the given value into octal value.\
+        \n\t\tx = Converts the given value into hexadecimal value.\n", argv[0]);
     } else if(argc == 3) {
         exec(argv[1], argv[2]);
     }
