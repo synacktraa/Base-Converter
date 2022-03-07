@@ -1,11 +1,17 @@
-basecon: basecon.o utils.o
-	gcc basecon.c utils.o -o basecon
+
+BIN=gcc
+CFLAGS=-g -Wall
+
+all: basecon
 
 basecon.o: basecon.c
-	gcc -c basecon.c
+	$(BIN) $(CFLAGS) -c basecon.c
 
-utils.o: utils.c
-	gcc -c utils.c
+utils.o: utils.c utils.h
+	$(BIN) $(CFLAGS) -c utils.c
 
-clean: 
+basecon: basecon.o utils.o
+	$(BIN) $(CFLAGS) basecon.o utils.o -o basecon
+
+clean:
 	rm *.o basecon
