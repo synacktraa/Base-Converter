@@ -285,11 +285,11 @@ void hexToOct(char* h){ //this function converts hex value to octal value
 int main(int argc, char*argv[]){
 
     if(argc == 2 && (Strcmp(argv[1], "-h") == 0)){
-        fprintf(stdout, "Usage: %s -<base> <value>\n|CLI options|:-\n\tBase:\
-        \n\t\td = Converts the given value into integer value.\
-        \n\t\tb = Converts the given value into binary value.\
-        \n\t\to = Converts the given value into octal value.\
-        \n\t\tx = Converts the given value into hexadecimal value.\n", argv[0]);
+        fprintf(stdout, "Usage: %s <opt> <value>\n|CLI options|:-\n\tBase:\
+        \n\t\t-d - Converts the given value into integer value.\
+        \n\t\t-b - Converts the given value into binary value.\
+        \n\t\t-o - Converts the given value into octal value.\
+        \n\t\t-x - Converts the given value into hexadecimal value.\n", argv[0]);
     } else if(argc == 3) {
         exec(argv[1], argv[2]);
     }

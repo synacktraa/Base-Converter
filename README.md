@@ -9,12 +9,12 @@ basecon -h
 Output:
 ```
 
-Usage: basecon --to.<Base> <value>
+Usage: basecon <opt> <value>
 |CLI options|:-
-        d - Converts the given value into integer value.
-        b - Converts the given value into binary value.
-        o - Converts the given value into octal value.
-        x - Converts the given value into hexadecimal value.
+        -d - Converts the given value into integer value.
+        -b - Converts the given value into binary value.
+        -o - Converts the given value into octal value.
+        -x - Converts the given value into hexadecimal value.
 ```
 ---
 ### Examples:
