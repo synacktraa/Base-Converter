@@ -47,7 +47,7 @@ void exec(char*base, char*data){
 
     int temp;
     char bin[50], prefix;
-    Memset(bin, 0, Strlen(bin));
+    memreset(bin, Strlen(bin));
     
     if(isLower(*(data+1))){
         prefix = *(data+1);
@@ -270,7 +270,7 @@ int hexToDec(char* h){ // this function converts hex value to dec value
    
 void hexToBin(char* h){ //this function converts hex value to bin value
     char binary[50];
-    Memset(binary, 0, Strlen(binary));
+    memreset(binary, Strlen(binary));
     int dec = hexToDec(h); //dec is set to value returned by hexToDec function
     decToBin(dec, binary); // calling decToBin function which converts the decimal to binary value and prints it.
     printf("0b%s\n", binary);
