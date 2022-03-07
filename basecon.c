@@ -27,7 +27,6 @@
 int number = 0;
 
 void exec(char*, char*);
-int power(int, int);
 
 //base conversion function prototypes
 int binToDec(char*);
@@ -44,25 +43,11 @@ void hexToOct(char*);
 void hexToBin(char*);
 
 
-int power(int base, int p){ //this user defined function takes a number and power vaue and returns base^p
-   int result = 1;
-   if(p){ //if the value is not 0, it runs the statement below
-      for(int i = p; i > 0; i--){ //i i set to p and condition checks if i is greater than 1 if yes...it runs the statement
-      // in the for block which is base is multiplied by base until i is equal 1 
-         result *= base;
-      }
-      return result;
-   }
-   else{ //if the value of p is 0
-      return result; //returns 1
-   }
-}
-
 void exec(char*base, char*data){
 
     int i, j, n, temp;
     char bin[50], prefix;
-    Memset(bin, 0, Strlen(bin));
+    memreset(bin, Strlen(bin));
     
     if(isLower(*(data+1))){
         prefix = *(data+1);
@@ -70,48 +55,56 @@ void exec(char*base, char*data){
         temp = delete(data, 0, temp);
     }
     if(prefix == 'b'){// if data 0th element is 0 and 1st element is char b
-        if(Strcmp(base, "--to.Int") == 0){ //if input startswith dec
-            printf("%d",binToDec(data)); //bin value is converted to decimal value
-        } else if(Strcmp(base, "--to.Hex") == 0){ //if input startswith hex
+        if(Strcmp(base, "-d") == 0){ //if input startswith dec
+            printf("%d\n",binToDec(data)); //bin value is converted to decimal value
+        } else if(Strcmp(base, "-x") == 0){ //if input startswith hex
             binToHex(data); //bin value is converted to hex value
-        } else if(Strcmp(base, "--to.Oct") == 0){ //if input startswith oct
+        } else if(Strcmp(base, "-o") == 0){ //if input startswith oct
             binToOct(data); //bin value is converted to octal value
-        } else if(Strcmp(base, "--to.Bin") == 0){
-            printf("0b%s", data);
+        } else if(Strcmp(base, "-b") == 0){
+            printf("0b%s\n", data);
+        } else{
+            fprintf(stderr, "Invalid Option.");
         }
     } else if(prefix == 'o'){
         number = AtoI(data);
-        if(Strcmp(base, "--to.Int") == 0){ //if input startswith dec
-            printf("%d", octToDec(number)); //oct value is converted to dec value
-        } else if(Strcmp(base, "--to.Hex") == 0){ //if input startswith hex
+        if(Strcmp(base, "-d") == 0){ //if input startswith dec
+            printf("%d\n", octToDec(number)); //oct value is converted to dec value
+        } else if(Strcmp(base, "-x") == 0){ //if input startswith hex
             octToHex(number); //oct value is converted to hex value
-        } else if(Strcmp(base, "--to.Bin") == 0){ //if input startswith bin
+        } else if(Strcmp(base, "-b") == 0){ //if input startswith bin
             octToBin(number); //oct value is converted to bin value
-        } else if(Strcmp(base, "--to.Oct") == 0){
-            printf("0o%s", data);
-        }          
+        } else if(Strcmp(base, "-o") == 0){
+            printf("0o%s\n", data);
+        }           else{
+            fprintf(stderr, "Invalid Option.");
+        }
     } else if(prefix == 'x'){
-        if(Strcmp(base, "--to.Int") == 0){ //if input startswith dec
-            printf("%d", hexToDec(data)); //hex value is converted to dec value
-        } else if(Strcmp(base, "--to.Oct") == 0){ //if input startswith oct
+        if(Strcmp(base, "-d") == 0){ //if input startswith dec
+            printf("%d\n", hexToDec(data)); //hex value is converted to dec value
+        } else if(Strcmp(base, "-o") == 0){ //if input startswith oct
             hexToOct(data); //hex value is converted to oct value
-        } else if(Strcmp(base, "--to.Bin") == 0){ //if input startswith bin
+        } else if(Strcmp(base, "-b") == 0){ //if input startswith bin
             hexToBin(data); //hex value is converted to bin value
-        } else if(Strcmp(base, "--to.Hex") == 0){
-            printf("0x%s", data);
+        } else if(Strcmp(base, "-x") == 0){
+            printf("0x%s\n", data);
+        } else{
+            fprintf(stderr, "Invalid Option.");
         }
 
     }else {
         number = AtoI(data);
-        if(Strcmp(base, "--to.Bin") == 0){ //if input startswith bin
+        if(Strcmp(base, "-b") == 0){ //if input startswith bin
             decToBin(number, bin); //dec value is converted to bin value
-            printf("0b%s", bin);
-        } else if(Strcmp(base, "--to.Hex") == 0){ //if input startswith hex
+            printf("0b%s\n", bin);
+        } else if(Strcmp(base, "-x") == 0){ //if input startswith hex
             decToHex(number); //dec value is converted to hex value
-        } else if(Strcmp(base, "--to.Oct") == 0){ //if input startswith oct
+        } else if(Strcmp(base, "-o") == 0){ //if input startswith oct
             decToOct(number); //dec value is converted to oct value
-        } else if(Strcmp(base, "--to.Int") == 0){
-            printf("%s", data);
+        } else if(Strcmp(base, "-d") == 0){
+            printf("%s\n", data);
+        } else{
+            fprintf(stderr, "Invalid Option.");
         }
 
     }  
@@ -186,7 +179,7 @@ void decToHex(int n){ //this function converts decimal value to hexadecimal valu
    hex[i] = '\0'; //as hex array is a string, we need to give a null character at the end of string.
     
    reverse(hex);
-   printf("0x%s", hex);
+   printf("0x%s\n", hex);
 }
 
 
@@ -206,6 +199,7 @@ void decToOct(int n){ //this fucntion converts decimal value to octal value
    printf("0o");
    for (int j = count-1; j >= 0; j--) //looping the array oct in reverse to print it's content
       printf("%d", oct[j]);
+      printf("\n");
 }
 
 int octToDec(int n){//this function converts octal value to dec value
@@ -231,7 +225,7 @@ void octToBin(int n){ //this function converts oct value to binary value
    char bin[20]; 
    int dec = octToDec(n); //dec is set to the value returned by ocToDec function
    decToBin(dec, bin); //converts dec value to binary value and prints it.
-   printf("%s", bin);
+   printf("%s\n", bin);
 }
 
 void octToHex(int n){ //this function converts oct value to hex value
@@ -285,10 +279,10 @@ int hexToDec(char* h){ // this function converts hex value to dec value
    
 void hexToBin(char* h){ //this function converts hex value to bin value
     char binary[50];
-    Memset(binary, 0, Strlen(binary));
+    memreset(binary, Strlen(binary));
     int dec = hexToDec(h); //dec is set to value returned by hexToDec function
     decToBin(dec, binary); // calling decToBin function which converts the decimal to binary value and prints it.
-    printf("0b%s", binary);
+    printf("0b%s\n", binary);
 
 }
 
@@ -299,19 +293,19 @@ void hexToOct(char* h){ //this function converts hex value to octal value
 
 int main(int argc, char*argv[]){
 
-    if(argc == 2 && (Strcmp(argv[1], "--help")||Strcmp(argv[1], "-h"))){
-        fprintf(stdout, "Usage: %s --to.<Base> <value>\n|CLI options|:-\n\tBase:\
-        \n\t\tBin = Converts the given value into binary value.\
-        \n\t\tInt = Converts the given value into integer value.\
-        \n\t\tHex = Converts the given value into hexadecimal value.\
-        \n\t\tOct = Converts the given value into octal value.", argv[0]);
+    if(argc == 2 && (Strcmp(argv[1], "-h") == 0)){
+        fprintf(stdout, "Usage: %s -<base> <value>\n|CLI options|:-\
+        \n\td - Converts the given value into integer value.\
+        \n\tb - Converts the given value into binary value.\
+        \n\to - Converts the given value into octal value.\
+        \n\tx - Converts the given value into hexadecimal value.\n", argv[0]);
     } else if(argc == 3) {
         exec(argv[1], argv[2]);
     }
     else{
-        fprintf(stderr, "Usage: %s --to.<Base> <value>)\
+        fprintf(stderr, "Usage: %s -<base> <value>)\
         \nFor more, check help section:\
-        \n    %s --help 'or' -h", argv[0], argv[0]);
+        \n    %s -h\n", argv[0], argv[0]);
     }
 
     return 0;
