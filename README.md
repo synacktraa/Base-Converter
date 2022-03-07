@@ -1,51 +1,46 @@
 # Base Converter
 
 >A CLI based program to convert number from one base to another. 
-
-Compile:
-
-```powershell
-gcc baseconv.c utils.c -o baseconv
-```
 ---
 Ask For Help:
 ```powershell
-baseconv -h 'or' baseconv --help
+basecon -h 'or' basecon --help
 ```
 Output:
 ```
 
-Usage: baseconv --to.<Base> <value>
+Usage: basecon --to.<Base> <value>
 |CLI options|:-
-        Base:
-                Bin = Converts the given value into binary value.
-                Int = Converts the given value into integer value.
-                Hex = Converts the given value into hexadecimal value.
-                Oct = Converts the given value into octal value.
+        d - Converts the given value into integer value.
+        b - Converts the given value into binary value.
+        o - Converts the given value into octal value.
+        x - Converts the given value into hexadecimal value.
 ```
 ---
 ## Few Examples:
 
 >Bin to Hex &#x21B4;
 ```powershell
-baseconv --to.Hex 0b1111
+basecon -x 0b1111
 ```
 <br>
 
 >Hex to Int &#x21B4;
 ```powershell
-baseconv --to.Int 0x2F
+basecon -d 0x2F
 ```
 <br>
 
 >Int to Oct &#x21B4;
 ```powershell
-baseconv --to.Oct 47
+basecon -o 47
 ```
 <br>
 
 >Oct to Bin &#x21B4;
 ```powershell
-baseconv --to.Bin 0o17
+basecon -b 0o17
 ```
 ___
+
+>Note: only works till UINT_MAX value (will be buffing it soon.)
