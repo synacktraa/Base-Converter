@@ -2,9 +2,9 @@
 
 >A CLI based program to convert number from one base to another. 
 ---
-Ask For Help:
+Help:
 ```powershell
-basecon -h 'or' basecon --help
+basecon -h
 ```
 Output:
 ```
@@ -17,7 +17,7 @@ Usage: basecon --to.<Base> <value>
         x - Converts the given value into hexadecimal value.
 ```
 ---
-## Few Examples:
+### Examples:
 
 >Bin to Hex &#x21B4;
 ```powershell
