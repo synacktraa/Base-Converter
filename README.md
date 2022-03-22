@@ -2,6 +2,8 @@
 
 >A CLI based program to convert number from one base to another. 
 ---
+>### Kinda deprecated, will be making new program in c++ to work with larger values.
+___
 Help:
 ```powershell
 basecon -h
