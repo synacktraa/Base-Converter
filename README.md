@@ -2,7 +2,7 @@
 
 >A CLI based program to convert number from one base to another. 
 ---
->#### `can't work with number greater than 32 bits, will be making new program in c++ to work with larger values.`
+>#### `can't work with number greater than 32 bits, will be making new program in Golang to work with larger values.`
 ___
 Help:
 ```powershell
